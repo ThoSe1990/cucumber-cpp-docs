@@ -1,10 +1,10 @@
-.. _include_01_cwt_cucumber:
+.. _include_01_cucumber_cpp:
 
 ============
 Cucumber cpp 
 ============
 
-So lets build the project and find all implemented features. 
+So let us build the project and find all the implemented features. 
 
 Examples Build
 ==============
@@ -20,7 +20,7 @@ Run a CMake build to build the examples:
 Conan Recipe for cucumber-cpp
 =============================
 
-I recommend using Conan for dependency management. I have a conan recipe in  `another GitHub repository <https://github.com/ThoSe1990/cwt-cucumber-conan>`_ to create the conan package. This will do the job for now (I will add instructions, once I'm done with the recipe). Later I can push it to conancenter, when this project is really in use.
+I recommend using Conan for dependency management. I have a conan recipe in  `another GitHub repository <https://github.com/ThoSe1990/cwt-cucumber-conan>`_ to create the conan package. This will do the job for now (I'll add instructions, once I'm done with the recipe). Later I can push it to conancenter, when this project is actually in use.
 
 First we create the package: 
 
@@ -39,7 +39,7 @@ Then we can build the examples:
   cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./build/conan_toolchain.cmake 
   cmake --build ./build
 
-And we're done. If you want now to use cucumber-cpp in your projects, you have to use the just created Conan package and use it accordingly. 
+And we're done. If you want to use cucumber-cpp in your projects, you have to get the Conan package you just created and use it accordingly.
 
 See ``./conanfile.txt``:
 
@@ -68,15 +68,10 @@ And ``CMakeLists.txt``:
   target_link_libraries(${target} cucumber::cucumber)
 
 
-
-
-
 Box Example
 ===========
 
-
 The example which I provided is a simple ``box`` class: 
-
 
 .. code-block:: cpp 
 
@@ -98,25 +93,24 @@ The example which I provided is a simple ``box`` class:
     std::vector<std::string> m_items;
   };
 
-I guess it's pretty much self explanatory. A simple container to store some arbitrary items in it. 
-
+I think it's pretty self-explanatory. A simple container to store some arbitrary items.
 
 Implementing Steps 
 ==================
 
-In order to implement steps there are four different defines available. Each step creates a free function, which means we have to provide a function name. I didn't want to use the ``__LINE__`` macro or so, becauase this would mean when we use multiple files, we have same names. 
+To implement steps, there are four different defines available. Each step creates a free function, which means we have to give it a function name. I didn't want to use the ``__LINE__`` macro or something like that, because that would mean that if we use multiple files, we have the same names.
 
 - ``STEP(function_name, "step definition goes here")``
 - ``GIVEN(function_name, "step definition goes here")``
 - ``WHEN(function_name, "step definition goes here")``
 - ``THEN(function_name, "step definition goes here")``
 
-There is no difference in all those macros. The only reason for the naming is to better structure the code. 
+There is no difference between all these macros. The only reason for naming them is to better structure the code.
 
 Accessing Values
 ----------------
 
-Use `Cucumber expression <https://github.com/cucumber/cucumber-expressions>`_ in you step definition in order to use values. In the code you can use ``CUKE_ARG(..)`` to access the values by index. The index begins at 1 from the left: 
+Use `Cucumber expression <https://github.com/cucumber/cucumber-expressions>`_ in your step definition in order to use values. In the code you can use ``CUKE_ARG(..)`` to access the values by index. The index starts at 1 from the left: 
 
 .. code-block:: cpp
 
@@ -135,16 +129,16 @@ Use `Cucumber expression <https://github.com/cucumber/cucumber-expressions>`_ in
   }
 
 .. note::
-  I overloaded the implicit conversion operator to get different types. So the ``auto`` keyword will not work here. And, use the correct types, cucumber-cpp checks at runtime if it can convert a value to each specific type.
+  I overloaded the implicit conversion operator to get different types. So the ``auto`` keyword will not work here. And, using the correct types, cucumber-cpp checks at runtime if it can convert a value to each specific type.
 
 Currently supported: ``{byte}`` , ``{short}``,  ``{int}`` , ``{long}``, ``{float}`` , ``{double}`` and ``{string}``.
 
 Scenario Context ``cuke::context``
 ----------------------------------
 
-Use ``cuke::context`` in order to store objects for the duration of a Scenario. Each type can be inserted once to the ``cuke::context`` and lives as long as the Scenario runs. At the end of each Scenario the ``cuke::context`` destroys all objects. 
+Use ``cuke::context`` to store objects for the duration of a scenario. Each type can be added to ``cuke::context`` once and lives as long as the scenario runs. At the end of each scenario, the ``cuke::context`` destroys all objects.
 
-``cuke::context`` can be called with or without arguments. If arguments are passed, it forwards the arguments to the objects constructor. If now arguments are given, the default constructor is called. Both calls return a reference to the given object: 
+``cuke::context`` can be called with or without arguments. If arguments are passed, they are passed to the constructor of the object. If arguments are given, the default constructor is called. Both calls return a reference to the given object:
 
 .. code-block:: cpp
 
@@ -181,7 +175,6 @@ After a Scenario is done, the ``box`` is destroyed.
 The underlying mechanism is a type erased value ``context_value``, in a ``std::unordered_map<std::type_index, context_type>``.
 
 
-
 Step Results  
 ------------
 
@@ -192,7 +185,7 @@ There are four differnt kinds of step results:
 - ``skipped``
 - ``undefined``
 
-In order to evaluate a step use the evaluation functions, like in other test frameworks: 
+To evaluate a step, use the evaluation functions as in other test frameworks:
 
 - ``cuke::equal(lhs, rhs)``
 - ``cuke::not_equal(lhs, rhs)``
@@ -204,7 +197,7 @@ In order to evaluate a step use the evaluation functions, like in other test fra
 - ``cuke::is_false(condition)``
 
 
-After the failing step the rest is skipped. We can force a Scenario to fail like this: 
+After the failed step, the rest is skipped. We can force a scenario to fail in this way:
 
 .. code-block::
 
@@ -228,7 +221,7 @@ After the failing step the rest is skipped. We can force a Scenario to fail like
 Tags ``-t`` / ``--tags``
 ========================
 
-Use the terminal option ``-t`` or ``--tags`` to provide tags. This will then check the given condition with tagged scenario and execute them accordingly. Consider this example: 
+Use the terminal option ``-t`` or ``--tags`` to specify tags. This will then check the given condition with the tagged scenario and execute it accordingly. Consider this example:
 
 .. code-block:: gherkin
 
@@ -248,14 +241,16 @@ Use the terminal option ``-t`` or ``--tags`` to provide tags. This will then che
       Then The box contains 4 item(s)
 
 
-And when we run this with tags, we can control which scenarios are executed.
+And when we do this with tags, we can control which scenarios are run.
 
 This executes both scenarios:
+
 .. code-block:: sh
 
   ./build/bin/box ./examples/features/4_tags.feature -t "@apples or @bananas"
 
-And this would just execute the second scenario due to the `and` condition:
+And this would only execute the second scenario because of the ``and`` condition:
+
 .. code-block:: sh
   
   ./build/bin/box ./examples/features/4_tags.feature -t "@apples and @bananas"
@@ -268,7 +263,7 @@ You can add Tags to following keywords:
 - ``Examples:``
 
 .. note::
-  Tags are inherited to the next category. This means if a feature is tagged, the tag is applied to all Scenarios/Scenario Outlines in it.
+  Tags are inherited by the next category. This means that if a feature is tagged, the tag will be applied to all scenarios/scenario outlines within it.
 
 The rules / syntax keywords are:
 
@@ -311,14 +306,13 @@ In a Scenario Outline you can define variables and run a scenario multiple times
         | 2     | "paper"     |
         | 3     | "calenders" |
 
-This Scenario is now executed two time for fruits and three times for the office stuff, with their values accordingly. 
-
+Without specifying any tags, these scenarios will be run twice for the fruits and three times for the office stuff. When specifying tags, you can create your logical condition to trigger each scenario here.
 
 
 Hooks
 =====
 
-Hooks are executed before and after each scenario or step. The implementation is pretty straightforward. You can have multiple hooks of the same type. All of them are executed at their time.
+Hooks are executed before and after each scenario or step. Implementation is fairly straightforward. You can have multiple hooks of the same type. They will all be executed at the appropriate time.
 
 .. code-block:: cpp 
   
@@ -345,12 +339,12 @@ You can try it out, and add some prints to it.
 Tagged Hooks
 ============
 
-You can add a tag expression to your hook. Use  
+ou can add a tag expression to your hook. You use these defines:  
 
 - ``BEFORE_T(name, "tags come here")`` for a tagged hook before a scenrio
 - ``AFTER_T(name, "tags come here")`` for a tagged hook after a scenario
 
-This means a tagged hook is executed, when a scenario fulfills the given condition. You can pass in any logical expression to a tagged hook:
+This means that a tagged hook is executed when a scenario satisfies the specified condition. You can pass any logical expression to a tagged hook:
 
 .. code-block:: cpp
 
@@ -425,6 +419,40 @@ A background is a set of steps (or a single step) which are the first steps of e
 
 In this case every Scenario starts with a box and one apple in it. 
 
+Doc Strings
+===========
+
+Doc strings are implemented and can be appended to a step. Then use ``CUKE_ARG(..)`` to access it. The doc string is always the last available value. In this case (with no other values) it is ``1``:
+
+.. code-block::
+
+  STEP(doc_string, "This prints the doc string")
+  {
+    const std::string doc_string = CUKE_ARG(1);
+    std::cout << doc_string << '\n';
+  }
+
+Which prints the doc string right before the passed step (first executes the step, then prints the result):
+
+.. code-block:: sh
+  Feature: My first feature  .\examples\features\1_first_scenario.feature:2
+
+  Scenario: First Scenario  .\examples\features\1_first_scenario.feature:4
+
+      This is a doc string
+      you can add multiple lines
+      of text in here.
+
+  [   PASSED    ] This prints the doc string
+      """
+      This is a doc string
+      you can add multiple lines
+      of text in here.
+      """  .\examples\features\1_first_scenario.feature:5
+
+
+  1 Scenarios (1 passed)
+  1 Steps (1 passed)
 
 
 Executing Single Scenarios / Directories
@@ -432,7 +460,7 @@ Executing Single Scenarios / Directories
 
 ### Single Scenarios / Directories
 
-If you want to just run single scenarios, you can append the according line to the feature file:
+If you only want to run single scenarios, you can append the appropriate line to the feature file:
 
 This runs a Scenario in Line 6:
 

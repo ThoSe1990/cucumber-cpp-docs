@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CWT-Cucumber &mdash; SphinxExample  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Documentation" href="10_api.html" />
+    <link rel="prev" title="Introduction" href="00_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SphinxExample
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CWT-Cucumber</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementing-steps">Implementing Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-macros">Step-Macros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-definition-and-values">Step Definition and Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-tests">Executing Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluating-a-step">Evaluating a Step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-values-cuke-arg">Accessing Values <code class="docutils literal notranslate"><span class="pre">CUKE_ARG</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scenario-context-cuke-context">Scenario Context <code class="docutils literal notranslate"><span class="pre">cuke::context</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tags-t-tags">Tags <code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--tags</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scenario-outline">Scenario Outline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tagged-hooks">Tagged Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#single-scenarios-l-line">Single Scenarios <code class="docutils literal notranslate"><span class="pre">-l</span></code> / <code class="docutils literal notranslate"><span class="pre">--line</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executing-all-files-from-a-directory">Executing All Files From A Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-your-own-main">Using your own <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#whats-missing">Whats Missing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10_api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SphinxExample</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CWT-Cucumber</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/chapters/01_cwt_cucumber.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cwt-cucumber">
+<span id="include-01-cwt-cucumber"></span><h1>CWT-Cucumber<a class="headerlink" href="#cwt-cucumber" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I recommend using Conan for dependency management. I have a conan recipe in  <a class="reference external" href="https://github.com/ThoSe1990/cwt-cucumber-conan">another GitHub repository</a> to create the conan package. This will do the job for now (I will add instructions, once I’m done with the recipe). Later I can push it to conancenter, when this project is really in use.</p>
+</div>
+<p>The <cite>./examples</cite> directory contains various examples that have been created during the life of this project. All examples are compatible with C and C++ (17 or higher):</p>
+<ul class="simple">
+<li><p><cite>./examples/cpp</cite>: Sources for the C++ implementation</p></li>
+<li><p><cite>./examples/c</cite>: Sources for the C implementation</p></li>
+<li><p><cite>./examples/features</cite>: Feature files to run the examples with either the C or C++ implementation</p></li>
+</ul>
+<p>There are no third party libraries, which means that all you need to do is a regular CMake build within this project directory:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>./build
+cmake<span class="w"> </span>--build<span class="w"> </span>./build
+</pre></div>
+</div>
+<p>In this documentation I’ll focus on the C++ version. If there is a need for more detailed documentation on the C version, please let me know.</p>
+<p>The context of all examples is a <cite>box</cite> class, without complex logic. Lets have a quick look at it, but it should be self-explanatory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// examples/cpp/box.hpp</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">box</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">box</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="w">    </span><span class="n">box</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="p">)</span><span class="w"> </span><span class="o">:</span>
+<span class="w">      </span><span class="n">m_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span><span class="w"> </span><span class="n">m_height</span><span class="p">(</span><span class="n">height</span><span class="p">),</span><span class="w"> </span><span class="n">m_depth</span><span class="p">(</span><span class="n">depth</span><span class="p">),</span><span class="w"> </span><span class="n">m_weight</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">m_is_open</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">volume</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_height</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_depth</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_height</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">side</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_depth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_height</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">top</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_depth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m_width</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set_weight</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">weight</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weight</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">weight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_weight</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">open</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_is_open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">m_is_open</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_open</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">m_is_open</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_width</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_height</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m_depth</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m_weight</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">m_is_open</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<section id="implementing-steps">
+<h2>Implementing Steps<a class="headerlink" href="#implementing-steps" title="Link to this heading"></a></h2>
+<p>In this chapter you will find all the information about implementing the step. First there are the macros to use, second there is the step itself and third there is the first example.</p>
+<section id="step-macros">
+<h3>Step-Macros<a class="headerlink" href="#step-macros" title="Link to this heading"></a></h3>
+<p>There are four defines to implement steps. Each define requires a unique function name and the step definition. All four are exactly the same and it makes no difference which you use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STEP(function_name,</span> <span class="pre">&quot;step</span> <span class="pre">definition</span> <span class="pre">goes</span> <span class="pre">here&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GIVEN(function_name,</span> <span class="pre">&quot;step</span> <span class="pre">definition</span> <span class="pre">goes</span> <span class="pre">here&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WHEN(function_name,</span> <span class="pre">&quot;step</span> <span class="pre">definition</span> <span class="pre">goes</span> <span class="pre">here&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">THEN(function_name,</span> <span class="pre">&quot;step</span> <span class="pre">definition</span> <span class="pre">goes</span> <span class="pre">here&quot;)</span></code></p></li>
+</ul>
+</section>
+<section id="step-definition-and-values">
+<h3>Step Definition and Values<a class="headerlink" href="#step-definition-and-values" title="Link to this heading"></a></h3>
+<p>The step definition itself is a string. All values are defined inside curly brackets <code class="docutils literal notranslate"><span class="pre">{</span></code> <code class="docutils literal notranslate"><span class="pre">}</span></code> as <a class="reference external" href="https://github.com/cucumber/cucumber-expressions">Cucumber expression</a>.</p>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GIVEN</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;This is a step with a {string} and a {int}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wich later can be used as:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Given </span><span class="nf">This is a step with a &quot;</span><span class="s">string value</span><span class="nf">&quot; and a </span><span class="s">5</span>
+</pre></div>
+</div>
+<p>Currently supported values are: <code class="docutils literal notranslate"><span class="pre">{byte}</span></code> , <code class="docutils literal notranslate"><span class="pre">{short}</span></code>,  <code class="docutils literal notranslate"><span class="pre">{int}</span></code> , <code class="docutils literal notranslate"><span class="pre">{long}</span></code>, <code class="docutils literal notranslate"><span class="pre">{float}</span></code> , <code class="docutils literal notranslate"><span class="pre">{double}</span></code> and <code class="docutils literal notranslate"><span class="pre">{string}</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">{string}</span></code> has to be in double quotes in the feature file. Anonymus strings are not supported.</p>
+</div>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h3>
+<p>CWT-Cucumber compiles already its own <code class="docutils literal notranslate"><span class="pre">main</span></code>. This means that you only have to include your sources and <code class="docutils literal notranslate"><span class="pre">cwt/cucumber.hpp</span></code>. Then use the provided defines to implement the step body:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cwt/cucumber.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;box.hpp&quot;</span>
+
+<span class="n">GIVEN</span><span class="p">(</span><span class="n">box_init</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;A box with {int} x {int} x {int}&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">h</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">WHEN</span><span class="p">(</span><span class="n">box_open</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I open the box&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">().</span><span class="n">open</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">THEN</span><span class="p">(</span><span class="n">box_is_open</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The box is open&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">is_true</span><span class="p">(</span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">().</span><span class="n">is_open</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">THEN</span><span class="p">(</span><span class="n">box_volume</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The volume is {long}&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">equal</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span><span class="w"> </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">().</span><span class="n">volume</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="executing-tests">
+<h3>Executing Tests<a class="headerlink" href="#executing-tests" title="Link to this heading"></a></h3>
+<p>After compiling the examples there is <cite>./build/bin/box</cite> (this path can vary, depending on your operating system and defined build directory).</p>
+<p>Execute <cite>./build/bin/box</cite> from the project root directory, with the feature file as first argument and you’ll see the test result:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/first_example.feature
+
+<span class="w">  </span>Feature:<span class="w"> </span>My<span class="w"> </span>First<span class="w"> </span>Feature<span class="w"> </span>File<span class="w">  </span>./examples/features/first_example.feature:3
+
+<span class="w">  </span>Scenario:<span class="w"> </span>An<span class="w"> </span>arbitrary<span class="w"> </span>box<span class="w">  </span>./examples/features/first_example.feature:6
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>A<span class="w"> </span>box<span class="w"> </span>with<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w">  </span>./examples/features/first_example.feature:7
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>I<span class="w"> </span>open<span class="w"> </span>the<span class="w"> </span>box<span class="w">  </span>./examples/features/first_example.feature:8
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>The<span class="w"> </span>box<span class="w"> </span>is<span class="w"> </span>open<span class="w">   </span>./examples/features/first_example.feature:9
+
+
+<span class="m">1</span><span class="w"> </span>Scenarios<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>passed<span class="o">)</span>
+<span class="m">3</span><span class="w"> </span>Steps<span class="w"> </span><span class="o">(</span><span class="m">3</span><span class="w"> </span>passed<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="evaluating-a-step">
+<h2>Evaluating a Step<a class="headerlink" href="#evaluating-a-step" title="Link to this heading"></a></h2>
+<p>Use the assert functions in the step body. If this brings a negative result, the step is evaluated to <code class="docutils literal notranslate"><span class="pre">FAILED</span></code> and all following steps in a scenario are <code class="docutils literal notranslate"><span class="pre">SKIPPED</span></code>.</p>
+<p>There are different assert functions. Use the most apropriate one, depending on your values. The values have to be compareable (see <a class="reference internal" href="10_api.html#api-asserts"><span class="std std-ref">Asserts</span></a>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::equal(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::not_equal(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::greater(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::greater_or_equal(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::less(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::less_or_equal(lhs,</span> <span class="pre">rhs)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::is_true(condition)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuke::is_false(condition)</span></code></p></li>
+</ul>
+<p>After the failing step the rest is skipped, as you can see here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./build/bin/box ./examples/features/failing_example.feature
+
+  Feature: My First Feature File  ./examples/features/first_example.feature:3
+
+  Scenario: An arbitrary box  ./examples/features/first_example.feature:6
+[   PASSED    ] A box with 2 x 2 x 2  ./examples/features/first_example.feature:7
+Value 99 is not equal to 8 in following step:
+[   FAILED    ] The volume is 99   ./examples/features/first_example.feature:8
+[   SKIPPED   ] I open the box  ./examples/features/first_example.feature:9
+[   SKIPPED   ] The box is open   ./examples/features/first_example.feature:10
+
+Failed Scenarios:
+  Scenario: An arbitrary box    ./examples/features/first_example.feature:6
+
+1 Scenarios (1 skipped)
+4 Steps (1 failed, 2 skipped, 1 passed)
+</pre></div>
+</div>
+</section>
+<section id="accessing-values-cuke-arg">
+<h2>Accessing Values <code class="docutils literal notranslate"><span class="pre">CUKE_ARG</span></code><a class="headerlink" href="#accessing-values-cuke-arg" title="Link to this heading"></a></h2>
+<p>Use <a class="reference internal" href="10_api.html#api-cuke-arg"><span class="std std-ref">CUKE_ARG</span></a> in the step body to access a value. Start with index 1 for the first value. Use the corresponding type when you access the value, for instance:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">STEP</span><span class="p">(</span><span class="n">some_step</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;A {string}, an {int} and a {float}&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">auto</span></code> type deduction does not work here. The underlying function is overloaded by returntype.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Declare your variables as <code class="docutils literal notranslate"><span class="pre">const</span></code> or <code class="docutils literal notranslate"><span class="pre">unsigned</span></code> if you need them <code class="docutils literal notranslate"><span class="pre">const</span></code> or <code class="docutils literal notranslate"><span class="pre">unsigned</span></code>.</p>
+</div>
+</section>
+<section id="scenario-context-cuke-context">
+<h2>Scenario Context <code class="docutils literal notranslate"><span class="pre">cuke::context</span></code><a class="headerlink" href="#scenario-context-cuke-context" title="Link to this heading"></a></h2>
+<p>The scenario context or <code class="docutils literal notranslate"><span class="pre">cuke::context</span></code> stores an object for the duration of a scenario. After the scenario is finished, the object is destroyed.</p>
+<p>Recall these steps from the first example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">GIVEN</span><span class="p">(</span><span class="n">box_init</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;A box with {int} x {int} x {int}&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CUKE_ARG</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">h</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">WHEN</span><span class="p">(</span><span class="n">box_open</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I open the box&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">().</span><span class="n">open</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In one step we forward all arguments to the dedicated constructor and in the other modify the object. <code class="docutils literal notranslate"><span class="pre">cuke::context</span></code> returns a reference to the object, see <a class="reference internal" href="10_api.html#api-cuke-context"><span class="std std-ref">cuke::context</span></a>.</p>
+<p>These are the key points for <code class="docutils literal notranslate"><span class="pre">cuke::context</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Destroys all objects at the end of a scenario</p></li>
+<li><p>From each type one instance can be hold</p></li>
+<li><p>A constructor is invoked once. If the object exists, it returns a reference to the object</p></li>
+<li><p>Given arguments are ignored when the object already exists</p></li>
+</ol>
+</section>
+<section id="tags-t-tags">
+<h2>Tags <code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--tags</span></code><a class="headerlink" href="#tags-t-tags" title="Link to this heading"></a></h2>
+<p>You can add tags to your Scenarios (and Scenario Outlines) as following:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/tags.feature</span>
+
+<span class="k">Feature:</span><span class="nf"> Tags</span>
+
+<span class="nf">  @small_boxes</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An arbitrary box</span>
+<span class="k">    Given </span><span class="nf">A box with </span><span class="s">1</span><span class="nf"> x </span><span class="s">1</span><span class="nf"> x </span><span class="s">1</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">The volume is </span><span class="s">1</span>
+
+<span class="nf">  </span><span class="nt">@mid_sized_boxes</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An arbitrary box</span>
+<span class="k">    Given </span><span class="nf">A box with </span><span class="s">10</span><span class="nf"> x </span><span class="s">15</span><span class="nf"> x </span><span class="s">12</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">The volume is </span><span class="s">1800</span>
+
+<span class="nf">  </span><span class="nt">@big_boxes</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An arbitrary box</span>
+<span class="k">    Given </span><span class="nf">A box with </span><span class="s">90</span><span class="nf"> x </span><span class="s">80</span><span class="nf"> x </span><span class="s">70</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">The volume is </span><span class="s">504000</span>
+</pre></div>
+</div>
+<p>Now you can control the execution with <code class="docutils literal notranslate"><span class="pre">-t</span></code> or <code class="docutils literal notranslate"><span class="pre">--tags</span></code> with a tag expression (bool condition) inside the quotes and the corresponding tags:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/tags.feature<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;@small_boxes or @big_boxes&quot;</span>
+</pre></div>
+</div>
+<p>The rules / syntax keywords are:</p>
+<ul class="simple">
+<li><p>Write the tags with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol</p></li>
+<li><p>Logical operators: <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">xor</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code></p></li>
+<li><p>Parentheses <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">)</span></code></p></li>
+</ul>
+<p>So for instance this would be a valid statement: <code class="docutils literal notranslate"><span class="pre">&quot;(&#64;small_boxes</span> <span class="pre">and</span> <span class="pre">&#64;big_boxes)</span> <span class="pre">or</span> <span class="pre">&#64;mid_sized_boxes&quot;</span></code></p>
+<p>If you don’t pass <code class="docutils literal notranslate"><span class="pre">-t</span></code> or <code class="docutils literal notranslate"><span class="pre">--tags</span></code> to the program options, all Scenarios are executed.</p>
+</section>
+<section id="scenario-outline">
+<h2>Scenario Outline<a class="headerlink" href="#scenario-outline" title="Link to this heading"></a></h2>
+<p>In a scenario outline you can define variables and run a scenario with different values:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/scenario_outline.feature</span>
+
+<span class="k">Feature:</span><span class="nf"> Scenario Outline</span>
+
+<span class="nf">  </span><span class="k">Scenario Outline:</span><span class="nf"> A lot of boxes</span>
+<span class="k">    Given </span><span class="nf">A box with </span><span class="nv">&lt;width&gt;</span><span class="nf"> x </span><span class="nv">&lt;height&gt;</span><span class="nf"> x </span><span class="nv">&lt;depth&gt;</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">The volume is </span><span class="nv">&lt;volume&gt;</span>
+
+<span class="nf">    </span><span class="k">Examples:</span>
+<span class="k">      |</span><span class="nv"> width</span><span class="k"> |</span><span class="nv"> height</span><span class="k"> |</span><span class="nv"> depth</span><span class="k"> |</span><span class="nv"> volume</span><span class="k"> |</span>
+<span class="k">      |</span><span class="s"> 1</span><span class="k">     |</span><span class="s"> 1</span><span class="k">      |</span><span class="s"> 1</span><span class="k">     |</span><span class="s"> 1</span><span class="k">      |</span>
+<span class="k">      |</span><span class="s"> 1</span><span class="k">     |</span><span class="s"> 2</span><span class="k">      |</span><span class="s"> 3</span><span class="k">     |</span><span class="s"> 6</span><span class="k">      |</span>
+<span class="k">      |</span><span class="s"> 2</span><span class="k">     |</span><span class="s"> 2</span><span class="k">      |</span><span class="s"> 4</span><span class="k">     |</span><span class="s"> 16</span><span class="k">     |</span>
+</pre></div>
+</div>
+<p>This Scenario is now executed three times, with each row of values.</p>
+<p>You can also add tags to examples. Begin a new table with the tag, followed by <code class="docutils literal notranslate"><span class="pre">Examples:</span></code> in the next line:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/scenario_outline.feature</span>
+<span class="c"># ...</span>
+
+<span class="nf">  </span><span class="nt">@mid_sized_boxes</span>
+<span class="nf">  </span><span class="k">Examples:</span>
+<span class="k">    |</span><span class="nv"> width</span><span class="k"> |</span><span class="nv"> height</span><span class="k"> |</span><span class="nv"> depth</span><span class="k"> |</span><span class="nv"> volume</span><span class="k"> |</span>
+<span class="k">    |</span><span class="s"> 10</span><span class="k">    |</span><span class="s"> 5</span><span class="k">      |</span><span class="s"> 10</span><span class="k">    |</span><span class="s"> 500</span><span class="k">    |</span>
+<span class="k">    |</span><span class="s"> 20</span><span class="k">    |</span><span class="s"> 2</span><span class="k">      |</span><span class="s"> 9</span><span class="k">     |</span><span class="s"> 360</span><span class="k">    |</span>
+
+<span class="nf">  </span><span class="nt">@big_boxes</span>
+<span class="nf">  </span><span class="k">Examples:</span>
+<span class="k">    |</span><span class="nv"> width</span><span class="k"> |</span><span class="nv"> height</span><span class="k"> |</span><span class="nv"> depth</span><span class="k"> |</span><span class="nv"> volume</span><span class="k">  |</span>
+<span class="k">    |</span><span class="s"> 200</span><span class="k">   |</span><span class="s"> 99</span><span class="k">     |</span><span class="s"> 150</span><span class="k">   |</span><span class="s"> 2970000</span><span class="k"> |</span>
+<span class="k">    |</span><span class="s"> 120</span><span class="k">   |</span><span class="s"> 55</span><span class="k">     |</span><span class="s"> 30</span><span class="k">    |</span><span class="s"> 198000</span><span class="k">  |</span>
+</pre></div>
+</div>
+<p>The program option <code class="docutils literal notranslate"><span class="pre">-t</span></code> / <code class="docutils literal notranslate"><span class="pre">--tags</span></code> works exactly as before. Pass tags to execute the tags, without tags all examples/scenarios are executed.</p>
+</section>
+<section id="hooks">
+<h2>Hooks<a class="headerlink" href="#hooks" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="10_api.html#api-hooks"><span class="std std-ref">Hooks</span></a> are executed before and after each scenario or step. The implementation is pretty straightforward. Just use the dedicated hook defines and give the hook a unique function name (in the current examples I commented the prints, uncomment them if you want to see):</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="nf">// ./examples/cpp/step_definition.cpp:</span>
+
+<span class="nf">BEFORE(before)</span>
+<span class="nf">{</span>
+<span class="nf">  std::puts(&quot;</span><span class="s">this runs before every scenario</span><span class="nf">&quot;);</span>
+<span class="nf">}</span>
+<span class="nf">AFTER(after)</span>
+<span class="nf">{</span>
+<span class="nf">  std::puts(&quot;</span><span class="s">this runs after every scenario</span><span class="nf">&quot;);</span>
+<span class="nf">}</span>
+<span class="nf">BEFORE_STEP(before_step)</span>
+<span class="nf">{</span>
+<span class="nf">  std::puts(&quot;</span><span class="s">this runs before every step</span><span class="nf">&quot;);</span>
+<span class="nf">}</span>
+<span class="nf">AFTER_STEP(after_step)</span>
+<span class="nf">{</span>
+<span class="nf">  std::puts(&quot;</span><span class="s">this runs after every step</span><span class="nf">&quot;);</span>
+<span class="nf">}</span>
+</pre></div>
+</div>
+<p>When executing the <code class="docutils literal notranslate"><span class="pre">first_example.feature</span></code> you see (the scenario print comes after the execution of the hook):</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/first_example.feature
+
+<span class="w">  </span>Feature:<span class="w"> </span>My<span class="w"> </span>First<span class="w"> </span>Feature<span class="w"> </span>File<span class="w">  </span>./examples/features/first_example.feature:3
+
+this<span class="w"> </span>runs<span class="w"> </span>before<span class="w"> </span>every<span class="w"> </span>scenario
+<span class="w">  </span>Scenario:<span class="w"> </span>An<span class="w"> </span>arbitrary<span class="w"> </span>box<span class="w">  </span>./examples/features/first_example.feature:6
+this<span class="w"> </span>runs<span class="w"> </span>before<span class="w"> </span>every<span class="w"> </span>step
+this<span class="w"> </span>runs<span class="w"> </span>after<span class="w"> </span>every<span class="w"> </span>step
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>A<span class="w"> </span>box<span class="w"> </span>with<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w">  </span>./examples/features/first_example.feature:7
+this<span class="w"> </span>runs<span class="w"> </span>before<span class="w"> </span>every<span class="w"> </span>step
+this<span class="w"> </span>runs<span class="w"> </span>after<span class="w"> </span>every<span class="w"> </span>step
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>I<span class="w"> </span>open<span class="w"> </span>the<span class="w"> </span>box<span class="w">  </span>./examples/features/first_example.feature:8
+this<span class="w"> </span>runs<span class="w"> </span>before<span class="w"> </span>every<span class="w"> </span>step
+this<span class="w"> </span>runs<span class="w"> </span>after<span class="w"> </span>every<span class="w"> </span>step
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>The<span class="w"> </span>box<span class="w"> </span>is<span class="w"> </span>open<span class="w">   </span>./examples/features/first_example.feature:9
+this<span class="w"> </span>runs<span class="w"> </span>before<span class="w"> </span>every<span class="w"> </span>step
+this<span class="w"> </span>runs<span class="w"> </span>after<span class="w"> </span>every<span class="w"> </span>step
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>The<span class="w"> </span>volume<span class="w"> </span>is<span class="w"> </span><span class="m">8</span><span class="w">   </span>./examples/features/first_example.feature:10
+this<span class="w"> </span>runs<span class="w"> </span>after<span class="w"> </span>every<span class="w"> </span>scenario
+
+
+<span class="m">1</span><span class="w"> </span>Scenarios<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>passed<span class="o">)</span>
+<span class="m">4</span><span class="w"> </span>Steps<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>passed<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tagged-hooks">
+<h2>Tagged Hooks<a class="headerlink" href="#tagged-hooks" title="Link to this heading"></a></h2>
+<p>You can add a tag expression to <a class="reference internal" href="10_api.html#api-tagged-hooks"><span class="std std-ref">Tagged Hooks</span></a> (similar to -t/–tags). Use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BEFORE_T(name,</span> <span class="pre">&quot;tags</span> <span class="pre">come</span> <span class="pre">here&quot;)</span></code> for a hook before a scenrio</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AFTER_T(name,</span> <span class="pre">&quot;tags</span> <span class="pre">come</span> <span class="pre">here&quot;)</span></code> for a hook after a scenario</p></li>
+</ul>
+<p>For example if we want to execute a hook only when it has the tags <code class="docutils literal notranslate"><span class="pre">&#64;small_boxes</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;open</span></code> we’d do this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// ./examples/cpp/step_definition.cpp:</span>
+
+<span class="c1">// a function name and tag expression (same for AFTER_T):</span>
+<span class="n">BEFORE_T</span><span class="p">(</span><span class="n">open_small_boxes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;@small_boxes and @open&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// we create a box with some default values</span>
+<span class="w">  </span><span class="c1">// and then we call immediately open()</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">context</span><span class="o">&lt;</span><span class="n">box</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1u</span><span class="p">,</span><span class="mi">1u</span><span class="p">,</span><span class="mi">1u</span><span class="p">).</span><span class="n">open</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Which means all scenarios with theses tags contain an opened box by default and this passes:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/tags.feature</span>
+<span class="c"># ...</span>
+
+<span class="nf">  </span><span class="nt">@small_boxes</span><span class="nf"> </span><span class="nt">@open</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An opened box</span>
+<span class="k">    Then </span><span class="nf">The box is open</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>Feature:<span class="w"> </span>Tags<span class="w">  </span>./examples/features/tags.feature:3
+
+<span class="w">  </span>Scenario:<span class="w"> </span>An<span class="w"> </span>opened<span class="w"> </span>box<span class="w">  </span>./examples/features/tags.feature:21
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>The<span class="w"> </span>box<span class="w"> </span>is<span class="w"> </span>open<span class="w">   </span>./examples/features/tags.feature:22
+
+
+<span class="m">1</span><span class="w"> </span>Scenarios<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>passed<span class="o">)</span>
+<span class="m">1</span><span class="w"> </span>Steps<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>passed<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h2>
+<p>A background is a set of steps (or a single step) which are the first steps of every <code class="docutils literal notranslate"><span class="pre">Scenario</span></code> in a <code class="docutils literal notranslate"><span class="pre">Feature</span></code>. After the feature definition add <code class="docutils literal notranslate"><span class="pre">Background</span></code>:</p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/background.feature</span>
+
+<span class="k">Feature:</span><span class="nf"> We want default open boxes!</span>
+
+<span class="nf">  </span><span class="k">Background:</span><span class="nf"> create an opened the box!</span>
+<span class="k">    Given </span><span class="nf">A box with </span><span class="s">2</span><span class="nf"> x </span><span class="s">2</span><span class="nf"> x </span><span class="s">2</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I open the box</span>
+
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An opened box</span>
+<span class="k">    Then </span><span class="nf">The box is open</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Background</span></code> is printed separately, before the scenario in the terminal:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/background.feature
+
+<span class="w">  </span>Feature:<span class="w"> </span>We<span class="w"> </span>want<span class="w"> </span>default<span class="w"> </span>open<span class="w"> </span>boxes!<span class="w">  </span>./examples/features/background.feature:3
+
+<span class="w">  </span>Background:<span class="w"> </span>create<span class="w"> </span>an<span class="w"> </span>opened<span class="w"> </span>the<span class="w"> </span>box!<span class="w">  </span>./examples/features/background.feature:5
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>A<span class="w"> </span>box<span class="w"> </span>with<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w"> </span>x<span class="w"> </span><span class="m">2</span><span class="w">  </span>./examples/features/background.feature:6
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>I<span class="w"> </span>open<span class="w"> </span>the<span class="w"> </span>box<span class="w">  </span>./examples/features/background.feature:7
+<span class="w">  </span>Scenario:<span class="w"> </span>An<span class="w"> </span>opened<span class="w"> </span>box<span class="w">  </span>./examples/features/background.feature:9
+<span class="o">[</span><span class="w">   </span>PASSED<span class="w">    </span><span class="o">]</span><span class="w"> </span>The<span class="w"> </span>box<span class="w"> </span>is<span class="w"> </span>open<span class="w">   </span>./examples/features/background.feature:10
+
+
+<span class="m">1</span><span class="w"> </span>Scenarios<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>passed<span class="o">)</span>
+<span class="m">3</span><span class="w"> </span>Steps<span class="w"> </span><span class="o">(</span><span class="m">3</span><span class="w"> </span>passed<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+<section id="single-scenarios-l-line">
+<h2>Single Scenarios <code class="docutils literal notranslate"><span class="pre">-l</span></code> / <code class="docutils literal notranslate"><span class="pre">--line</span></code><a class="headerlink" href="#single-scenarios-l-line" title="Link to this heading"></a></h2>
+<p>If you want to execute only single Scenarios, use the <code class="docutils literal notranslate"><span class="pre">-l</span></code> or <code class="docutils literal notranslate"><span class="pre">--line</span></code> program option after the feature filepath. Run multiple feature files and append one or more lines:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/box.feature<span class="w"> </span>-l<span class="w"> </span><span class="m">6</span>
+$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/box.feature<span class="w"> </span>-l<span class="w"> </span><span class="m">6</span><span class="w"> </span>-l<span class="w"> </span><span class="m">18</span>
+$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features/box.feature<span class="w"> </span>-l<span class="w"> </span><span class="m">6</span><span class="w"> </span>-l<span class="w"> </span><span class="m">18</span><span class="w"> </span>./examples/features/scenario_outline.feature<span class="w"> </span>-l<span class="w"> </span><span class="m">12</span>
+</pre></div>
+</div>
+</section>
+<section id="executing-all-files-from-a-directory">
+<h2>Executing All Files From A Directory<a class="headerlink" href="#executing-all-files-from-a-directory" title="Link to this heading"></a></h2>
+<p>In the C++ implementation you can execute all feature files from a directory. Pass the directory as program option and all feature files in there are executed:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./build/bin/box<span class="w"> </span>./examples/features
+</pre></div>
+</div>
+</section>
+<section id="using-your-own-main">
+<h2>Using your own <code class="docutils literal notranslate"><span class="pre">main</span></code><a class="headerlink" href="#using-your-own-main" title="Link to this heading"></a></h2>
+<p>There is also a <code class="docutils literal notranslate"><span class="pre">cucumber-no-main</span></code> target if you need your own main and implement more to you program. To execute the cucumber test you have to call the <code class="docutils literal notranslate"><span class="pre">init()</span></code> and <code class="docutils literal notranslate"><span class="pre">run()</span></code> method. The standard main looks like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// ./src/cwt/implementation/main.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;cwt/cucumber.hpp&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">cuke</span><span class="o">::</span><span class="n">details</span><span class="o">::</span><span class="n">init</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">cuke</span><span class="o">::</span><span class="n">details</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="whats-missing">
+<h2>Whats Missing<a class="headerlink" href="#whats-missing" title="Link to this heading"></a></h2>
+<p>So what is missing? By now I can think of is:
+- Comprehensive documentation (I’m working on that)
+- Conan recipe (after first version tag)
+- <code class="docutils literal notranslate"><span class="pre">-h</span></code> / <code class="docutils literal notranslate"><span class="pre">--help</span></code> option
+- Languages (currently only english keywords are implemented)
+- Rules
+- Reports (json, …)
+- …</p>
+<p>If you have anything or in case I missed something, just reach out to me in any form.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="00_intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="10_api.html" class="btn btn-neutral float-right" title="API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Thomas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

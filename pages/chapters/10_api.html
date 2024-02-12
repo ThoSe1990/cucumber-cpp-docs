@@ -46,11 +46,25 @@
 <li class="toctree-l1"><a class="reference internal" href="00_intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01_cwt_cucumber.html">CWT-Cucumber</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cuke-context"><code class="docutils literal notranslate"><span class="pre">cuke::context</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cuke-context"><code class="docutils literal notranslate"><span class="pre">cuke::context</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I0EN4cuke7contextER1Tv"><code class="docutils literal notranslate"><span class="pre">context()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I0DpEN4cuke7contextER1TDpRR4Args"><code class="docutils literal notranslate"><span class="pre">context()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#cuke-arg"><code class="docutils literal notranslate"><span class="pre">CUKE_ARG</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#hooks">Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tagged-hooks">Tagged Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#asserts">Asserts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#asserts">Asserts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke5equalEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke9not_equalEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">not_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke7greaterEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">greater()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke16greater_or_equalEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">greater_or_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke4lessEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">less()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I00EN4cuke13less_or_equalEvRK1TRK1U"><code class="docutils literal notranslate"><span class="pre">less_or_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N4cuke7is_trueEb"><code class="docutils literal notranslate"><span class="pre">is_true()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N4cuke8is_falseEb"><code class="docutils literal notranslate"><span class="pre">is_false()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -83,86 +97,265 @@
 <span id="include-10-api"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
 <section id="cuke-context">
 <span id="api-cuke-context"></span><h2><code class="docutils literal notranslate"><span class="pre">cuke::context</span></code><a class="headerlink" href="#cuke-context" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN4cuke7contextER1Tv">
+<span id="_CPPv3I0EN4cuke7contextEv"></span><span id="_CPPv2I0EN4cuke7contextEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="context_8hpp_1aeddc500040121288d300565292fe5a71"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN4cuke7contextER1Tv" title="cuke::context::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">context</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN4cuke7contextER1Tv" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates and returns a object of the given type to the scenario context. After a scenario all objects are destroyed in the scenario context. If the object does not exist in this context, the default constructor is called and the object created. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T</strong> – The object to create or access</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the object of type T </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0DpEN4cuke7contextER1TDpRR4Args">
+<span id="_CPPv3I0DpEN4cuke7contextEDpRR4Args"></span><span id="_CPPv2I0DpEN4cuke7contextEDpRR4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="context_8hpp_1ad35a1885f17d61538a951bce52a2a7a3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0DpEN4cuke7contextER1TDpRR4Args" title="cuke::context::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">context</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0DpEN4cuke7contextER1TDpRR4Args" title="cuke::context::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0DpEN4cuke7contextER1TDpRR4Args" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates and returns a object of the given type to the scenario context. After a scenario all objects are destroyed in the scenario context. If the object does not exist in this context, the arguments are forwarded to the dedicated constructor. </p>
+<p><strong>The arguments are ignored when the object is already in this context.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The object to create or access </p></li>
+<li><p><strong>Args</strong> – Variadic template parameter to forward all arguments to the dedicated constructor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the object of type T </p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="cuke-arg">
 <span id="api-cuke-arg"></span><h2><code class="docutils literal notranslate"><span class="pre">CUKE_ARG</span></code><a class="headerlink" href="#cuke-arg" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.CUKE_ARG">
+<span class="target" id="get__args_8hpp_1ad19233da5b79bca18b79aea0aa7e8ea7"></span><span class="sig-name descname"><span class="n"><span class="pre">CUKE_ARG</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.CUKE_ARG" title="Link to this definition"></a><br /></dt>
+<dd><p>Access variables from a step in the step body. <code class="docutils literal notranslate"><span class="pre">CUKE_ARG</span></code> starts at index 1 on the first value from the left side. </p>
+<p>C++ auto type deduction does not work here. The underlying function is overloaded by return type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> – Variable index to access </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value from the index in the given step </p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="hooks">
 <span id="api-hooks"></span><h2>Hooks<a class="headerlink" href="#hooks" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.BEFORE">
+<span class="target" id="defines_8hpp_1a984e3e41de4dd986092dc027b275c8f2"></span><span class="sig-name descname"><span class="n"><span class="pre">BEFORE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BEFORE" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook which is executed before every Scenario. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.AFTER">
+<span class="target" id="defines_8hpp_1a100fcfd819a809e3412394686a11c841"></span><span class="sig-name descname"><span class="n"><span class="pre">AFTER</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.AFTER" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook which is executed after every scenario. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.BEFORE_STEP">
+<span class="target" id="defines_8hpp_1a82e18fe99450fa3c8c36ce3136215ea1"></span><span class="sig-name descname"><span class="n"><span class="pre">BEFORE_STEP</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BEFORE_STEP" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook which is executed before every step. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.AFTER_STEP">
+<span class="target" id="cucumber_8hpp_1a06d54559c21436ed970852b33b40faa6"></span><span class="sig-name descname"><span class="n"><span class="pre">AFTER_STEP</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.AFTER_STEP" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook which is executed after every step. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="tagged-hooks">
 <span id="api-tagged-hooks"></span><h2>Tagged Hooks<a class="headerlink" href="#tagged-hooks" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygendefine: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.BEFORE_T">
+<span class="target" id="defines_8hpp_1a996306c1e898758d664e4b2bef65b911"></span><span class="sig-name descname"><span class="n"><span class="pre">BEFORE_T</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span>, <span class="n"><span class="pre">tag_expression</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.BEFORE_T" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook with a tag expression, which can run before a tagged scenario. </p>
+<p>Before running a tagged scenario, the tag expression is evaluated. If it evaluates to true, the hook is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+<li><p><strong>tag_expression</strong> – A tag expression (bool condition), like <code class="docutils literal notranslate"><p><span class="pre">&quot;&#64;tag1</span> <span class="pre">and</span></p>
+<p><span class="pre">&#64;tag2&quot;</span></p>
+</code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.AFTER_T">
+<span class="target" id="defines_8hpp_1a595ca74c7ba24ba5976971456befa552"></span><span class="sig-name descname"><span class="n"><span class="pre">AFTER_T</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">function_name</span></span>, <span class="n"><span class="pre">tag_expression</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.AFTER_T" title="Link to this definition"></a><br /></dt>
+<dd><p>Creates a hook with a tag expression, which can run after a tagged scenario. </p>
+<p>After running a tagged scenario, the tag expression is evaluated. If it evaluates to true, the hook is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> – A unique function name, this function name has no technical impact </p></li>
+<li><p><strong>tag_expression</strong> – A tag expression (bool condition), e.g. <code class="docutils literal notranslate"><p><span class="pre">&quot;&#64;tag1</span> <span class="pre">and</span></p>
+<p><span class="pre">&#64;tag2&quot;</span></p>
+</code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="asserts">
 <span id="api-asserts"></span><h2>Asserts<a class="headerlink" href="#asserts" title="Link to this heading"></a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>doxygenfunction: Cannot find file: /c/git/cucumber-cpp-docs/docs/_build/doxygen/xml/index.xml</p>
-</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke5equalEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke5equalERK1TRK1U"></span><span id="_CPPv2I00EN4cuke5equalERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1a43fca018e5957689c8ee9564e5130e94"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">equal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke5equalEvRK1TRK1U" title="cuke::equal::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke5equalEvRK1TRK1U" title="cuke::equal::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke5equalEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares the given values to be equal. If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke9not_equalEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke9not_equalERK1TRK1U"></span><span id="_CPPv2I00EN4cuke9not_equalERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1a2734cbb63f270c145725c74384379c2f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">not_equal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke9not_equalEvRK1TRK1U" title="cuke::not_equal::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke9not_equalEvRK1TRK1U" title="cuke::not_equal::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke9not_equalEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares the given values not to be equal. If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke7greaterEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke7greaterERK1TRK1U"></span><span id="_CPPv2I00EN4cuke7greaterERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1a8f78219517b21e9212a392245626a819"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">greater</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke7greaterEvRK1TRK1U" title="cuke::greater::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke7greaterEvRK1TRK1U" title="cuke::greater::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke7greaterEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares whether the first value (left) is greater than the second value (right). If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke16greater_or_equalEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke16greater_or_equalERK1TRK1U"></span><span id="_CPPv2I00EN4cuke16greater_or_equalERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1a426290bea3fa4d40e6a2d3c6184bcbb3"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">greater_or_equal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke16greater_or_equalEvRK1TRK1U" title="cuke::greater_or_equal::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke16greater_or_equalEvRK1TRK1U" title="cuke::greater_or_equal::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke16greater_or_equalEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares whether the first value (left) is greater or equal than the second value (right). If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke4lessEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke4lessERK1TRK1U"></span><span id="_CPPv2I00EN4cuke4lessERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1aca854db6eb9d5f450b1f1c4f32d88e5e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">less</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke4lessEvRK1TRK1U" title="cuke::less::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke4lessEvRK1TRK1U" title="cuke::less::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke4lessEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares whether the first value (left) is less the second value (right). If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN4cuke13less_or_equalEvRK1TRK1U">
+<span id="_CPPv3I00EN4cuke13less_or_equalERK1TRK1U"></span><span id="_CPPv2I00EN4cuke13less_or_equalERK1TRK1U"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">U</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="asserts_8hpp_1af5ccc493b70952c6554a47d72566019f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">less_or_equal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke13less_or_equalEvRK1TRK1U" title="cuke::less_or_equal::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">lhs</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN4cuke13less_or_equalEvRK1TRK1U" title="cuke::less_or_equal::U"><span class="n"><span class="pre">U</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I00EN4cuke13less_or_equalEvRK1TRK1U" title="Link to this definition"></a><br /></dt>
+<dd><p>Compares whether the first value (left) is less or equal than the second value (right). If not, the current step and scenario are set to Failed. </p>
+<p>The given types must be comparable. If they are not comparable (like string and integer), the current step and the scenario are set to failed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lhs</strong> – Left hand side parameter </p></li>
+<li><p><strong>rhs</strong> – Right hand side parameter </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4cuke7is_trueEb">
+<span id="_CPPv3N4cuke7is_trueEb"></span><span id="_CPPv2N4cuke7is_trueEb"></span><span id="cuke::is_true__b"></span><span class="target" id="asserts_8hpp_1a7a0917448aa9a127ae26fa83c6f2acea"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">is_true</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">condition</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4cuke7is_trueEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Asserts the given condition to true. If it is false, the current step and scenario are set to Failed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>condition</strong> – Bool expression to be evaluated </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N4cuke8is_falseEb">
+<span id="_CPPv3N4cuke8is_falseEb"></span><span id="_CPPv2N4cuke8is_falseEb"></span><span id="cuke::is_false__b"></span><span class="target" id="asserts_8hpp_1acdc53c92bf17abcc960135677011bc8b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">cuke</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">is_false</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">condition</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N4cuke8is_falseEb" title="Link to this definition"></a><br /></dt>
+<dd><p>Asserts the given condition to false. If it is true, the current step and scenario are set to Failed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>condition</strong> – Bool expression to be evaluated </p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 

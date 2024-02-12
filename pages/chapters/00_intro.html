@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CWT-Cucumber" href="01_cwt_cucumber.html" />
-    <link rel="prev" title="Coding with Thomas: Cucumber - A C/C++ Cucumber Interpreter" href="../index.html" /> 
+    <link rel="next" title="Cucumber cpp" href="01_cucumber_cpp.html" />
+    <link rel="prev" title="cucumber-cpp: A C++20 Cucumber Interpreter by Coding with Thomas" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,11 +46,13 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#how-i-started">How I started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#crafting-interpreters-clox">Crafting Interpreters <em>clox</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#feature-file-to-bytecode">Feature-File to Bytecode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crafting-interpreters-clox">Crafting Interpreters <em>clox</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-first-example">The First Example</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="01_cwt_cucumber.html">CWT-Cucumber</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_cucumber_cpp.html">Cucumber cpp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_api.html">API Documentation</a></li>
 </ul>
 
@@ -133,206 +135,83 @@
 <span class="n">feature</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>And this is translated into bytecode:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3.:</span>
-<span class="o">==</span> <span class="n">scenario</span> <span class="o">==</span>
-<span class="mi">0000</span>    <span class="mi">5</span> <span class="n">OP_CONSTANT</span>         <span class="mi">0</span> <span class="s1">&#39;Given any initial step&#39;</span>
-<span class="mi">0002</span>    <span class="o">|</span> <span class="n">OP_PRINT</span>
-<span class="mi">0003</span>    <span class="mi">6</span> <span class="n">OP_CONSTANT</span>         <span class="mi">1</span> <span class="s1">&#39;When something happens&#39;</span>
-<span class="mi">0005</span>    <span class="o">|</span> <span class="n">OP_PRINT</span>
-<span class="mi">0006</span>    <span class="mi">7</span> <span class="n">OP_CONSTANT</span>         <span class="mi">2</span> <span class="s1">&#39;Then we evaluate something&#39;</span>
-<span class="mi">0008</span>    <span class="o">|</span> <span class="n">OP_PRINT</span>
-<span class="mi">0009</span>    <span class="mi">8</span> <span class="n">OP_NIL</span>
-<span class="mi">0010</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
+<p>And this is translated into bytecode.</p>
+<section id="the-first-example">
+<h3>The First Example<a class="headerlink" href="#the-first-example" title="Link to this heading"></a></h3>
+<p>Lets see this by example, what happens. Consider the first example <code class="docutils literal notranslate"><span class="pre">./examples/features/1_first_scenario.feature</span></code></p>
+<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="k">Feature:</span><span class="nf"> My first feature</span>
+<span class="nf">  This is my cucumber-cpp hello world</span>
 
-<span class="c1"># 2.:</span>
-<span class="o">==</span> <span class="n">feature</span> <span class="o">==</span>
-<span class="mi">0000</span>    <span class="mi">8</span> <span class="n">OP_CONSTANT</span>         <span class="mi">0</span> <span class="s1">&#39;&lt;fn scenario&gt;&#39;</span>
-<span class="mi">0002</span>    <span class="mi">9</span> <span class="n">OP_GET_LOCAL</span>        <span class="mi">1</span>
-<span class="mi">0004</span>    <span class="o">|</span> <span class="n">OP_CALL</span>             <span class="mi">0</span>
-<span class="mi">0006</span>    <span class="o">|</span> <span class="n">OP_POP</span>
-<span class="mi">0007</span>   <span class="mi">10</span> <span class="n">OP_NIL</span>
-<span class="mi">0008</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
-
-<span class="c1"># 1.:</span>
-<span class="o">==</span> <span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span> <span class="o">==</span>
-<span class="mi">0000</span>   <span class="mi">10</span> <span class="n">OP_CONSTANT</span>         <span class="mi">1</span> <span class="s1">&#39;&lt;fn feature&gt;&#39;</span>
-<span class="mi">0002</span>    <span class="o">|</span> <span class="n">OP_DEFINE_GLOBAL</span>    <span class="mi">0</span> <span class="s1">&#39;feature&#39;</span>
-<span class="mi">0004</span>   <span class="mi">12</span> <span class="n">OP_GET_GLOBAL</span>       <span class="mi">2</span> <span class="s1">&#39;feature&#39;</span>
-<span class="mi">0006</span>    <span class="o">|</span> <span class="n">OP_CALL</span>             <span class="mi">0</span>
-<span class="mi">0008</span>    <span class="o">|</span> <span class="n">OP_POP</span>
-<span class="mi">0009</span>    <span class="o">|</span> <span class="n">OP_NIL</span>
-<span class="mi">0010</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
+<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> First Scenario</span>
+<span class="k">    Given </span><span class="nf">An empty box</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I place </span><span class="s">2</span><span class="nf"> x &quot;</span><span class="s">apple</span><span class="nf">&quot; in it</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">The box contains </span><span class="s">2</span><span class="nf"> item(s)</span>
 </pre></div>
 </div>
-<p>Now we can see three parts.</p>
-<ol class="arabic simple">
-<li><p>The script: A global function is defined and the call is emitted.</p></li>
-<li><p>This represents the function or its function body in which the nested scenario is defined. After its declaration we emit the call.</p></li>
-<li><p>The execution of each step works the same way, we pull a constant (which is later the step) and then we call the underlying function, which in this case is a single print.</p></li>
-</ol>
-<p>And this was my starting point for cwt-cucumber.</p>
+<p>Now if provide the define <code class="docutils literal notranslate"><span class="pre">PRINT_STACK</span></code> to enable the debug prints (which were very helpful during implementation) we can go through the different compiled chunks. First we start with the <code class="docutils literal notranslate"><span class="pre">script</span></code> chunk:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="n">script</span> <span class="o">==</span>
+<span class="mi">0000</span>    <span class="mi">11</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>   <span class="mi">0</span> <span class="s1">&#39;&lt;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:2&gt;&#39;</span>
+<span class="mi">0002</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">define_var</span>  <span class="mi">1</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:2&#39;</span>
+<span class="mi">0004</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">get_var</span>     <span class="mi">1</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:2&#39;</span>
+<span class="mi">0006</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">call</span>        <span class="mi">0</span>
+<span class="mi">0008</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">func_return</span>
+</pre></div>
+</div>
+<p>And this is just the <code class="docutils literal notranslate"><span class="pre">Feature</span></code>. All created functions are named by their filepath and linenumber. And since we want to call the feature we have <code class="docutils literal notranslate"><span class="pre">op_code::call</span></code> there, which loads the previous pushed varaible <code class="docutils literal notranslate"><span class="pre">.\examples\features\1_first_scenario.feature:2</span></code></p>
+<p>Next, we have the <code class="docutils literal notranslate"><span class="pre">Scenario</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="o">.</span>\<span class="n">examples</span>\<span class="n">features</span>\<span class="mi">1</span><span class="n">_first_scenario</span><span class="o">.</span><span class="n">feature</span><span class="p">:</span><span class="mi">2</span> <span class="o">==</span>
+<span class="mi">0000</span>    <span class="mi">2</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_linebreak</span>
+<span class="mi">0001</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">1</span> <span class="s1">&#39;Feature: My first feature&#39;</span>
+<span class="mi">0003</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="nb">print</span>       <span class="mi">0</span>
+<span class="mi">0005</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_indent</span>
+<span class="mi">0006</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">0</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:2&#39;</span>
+<span class="mi">0008</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">println</span>     <span class="mi">5</span>
+<span class="mi">0010</span>    <span class="mi">11</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">reset_context</span>
+<span class="mi">0011</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_before</span> <span class="mi">0</span>
+<span class="mi">0013</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">2</span> <span class="s1">&#39;&lt;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:5&gt;&#39;</span>
+<span class="mi">0015</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">define_var</span>  <span class="mi">3</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:5&#39;</span>
+<span class="mi">0017</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">get_var</span>     <span class="mi">3</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:5&#39;</span>
+<span class="mi">0019</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">call</span>        <span class="mi">0</span>
+<span class="mi">0021</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_after</span>  <span class="mi">0</span>
+<span class="mi">0023</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">func_return</span>
+</pre></div>
+</div>
+<p>Here we start with some printing operations to the terminal and then we call the scenario itself. Again, the function name is the location at line 5: <code class="docutils literal notranslate"><span class="pre">.\examples\features\1_first_scenario.feature:5</span></code>. Right before and after the scenario call the hooks are invoked, when they are implemented.</p>
+<p>And finally, we have the scenario call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="o">.</span>\<span class="n">examples</span>\<span class="n">features</span>\<span class="mi">1</span><span class="n">_first_scenario</span><span class="o">.</span><span class="n">feature</span><span class="p">:</span><span class="mi">5</span> <span class="o">==</span>
+<span class="mi">0000</span>    <span class="mi">5</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_linebreak</span>
+<span class="mi">0001</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">1</span> <span class="s1">&#39;Scenario: First Scenario&#39;</span>
+<span class="mi">0003</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="nb">print</span>       <span class="mi">0</span>
+<span class="mi">0005</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_indent</span>
+<span class="mi">0006</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">0</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:5&#39;</span>
+<span class="mi">0008</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">println</span>     <span class="mi">5</span>
+<span class="mi">0010</span>    <span class="mi">6</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">init_scenario</span>
+<span class="mi">0011</span>    <span class="mi">7</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">jump_if_failed</span>      <span class="mi">17</span>
+<span class="mi">0013</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_before_step</span>
+<span class="mi">0014</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">call_step</span>   <span class="mi">3</span> <span class="s1">&#39;An empty box&#39;</span>
+<span class="mi">0016</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_after_step</span>
+<span class="mi">0017</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">3</span> <span class="s1">&#39;An empty box&#39;</span>
+<span class="mi">0019</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">2</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:6&#39;</span>
+<span class="mi">0021</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_step_result</span>
+<span class="mi">0022</span>    <span class="mi">8</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">jump_if_failed</span>      <span class="mi">28</span>
+<span class="mi">0024</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_before_step</span>
+<span class="mi">0025</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">call_step</span>   <span class="mi">5</span> <span class="s1">&#39;I place 2 x &quot;apple&quot; in it&#39;</span>
+<span class="mi">0027</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_after_step</span>
+<span class="mi">0028</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">5</span> <span class="s1">&#39;I place 2 x &quot;apple&quot; in it&#39;</span>
+<span class="mi">0030</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">4</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:7&#39;</span>
+<span class="mi">0032</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_step_result</span>
+<span class="mi">0033</span>    <span class="mi">11</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">jump_if_failed</span>     <span class="mi">39</span>
+<span class="mi">0035</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_before_step</span>
+<span class="mi">0036</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">call_step</span>   <span class="mi">7</span> <span class="s1">&#39;The box contains 2 item(s)&#39;</span>
+<span class="mi">0038</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">hook_after_step</span>
+<span class="mi">0039</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">7</span> <span class="s1">&#39;The box contains 2 item(s)&#39;</span>
+<span class="mi">0041</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">constant</span>    <span class="mi">6</span> <span class="s1">&#39;.\examples</span><span class="se">\f</span><span class="s1">eatures</span><span class="se">\1</span><span class="s1">_first_scenario.feature:8&#39;</span>
+<span class="mi">0043</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">print_step_result</span>
+<span class="mi">0044</span>    <span class="o">|</span>  <span class="n">op_code</span><span class="p">::</span><span class="n">func_return</span>
+</pre></div>
+</div>
+<p>You can find all according <code class="docutils literal notranslate"><span class="pre">op_codes</span></code> here. From loading the variables to the jump condition <code class="docutils literal notranslate"><span class="pre">jump_if_failed</span></code> and the hooks before and after step. The scenario name gets resolved at runtime.</p>
 </section>
-<section id="feature-file-to-bytecode">
-<h2>Feature-File to Bytecode<a class="headerlink" href="#feature-file-to-bytecode" title="Link to this heading"></a></h2>
-<p>I left these debugging prints in the source. During CMake configuration you can set <cite>STACK_TRACE=1</cite> and all the bytecode and its stack will be printed to the terminal. And it really helped me during the implementation. To be honest, it has grown quite a bit and can be a bit hard to read the stack, because it overlaps with the general prints. But let’s have a look at the chunk in which a feature file is translated. I used some <cite>box</cite> examples:</p>
-<div class="highlight-gherkin notranslate"><div class="highlight"><pre><span></span><span class="c"># ./examples/features/first_examples.feature</span>
-
-<span class="k">Feature:</span><span class="nf"> My First Feature File</span>
-<span class="nf">  Just for demonstration</span>
-
-<span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> An arbitrary box</span>
-<span class="k">    Given </span><span class="nf">A box with </span><span class="s">2</span><span class="nf"> x </span><span class="s">2</span><span class="nf"> x </span><span class="s">2</span>
-<span class="nf">    </span><span class="k">When </span><span class="nf">I open the box</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">The box is open</span>
-<span class="nf">    </span><span class="k">And </span><span class="nf">The volume is </span><span class="s">8</span>
-</pre></div>
-</div>
-<p>As far as I noticed, it is valid to have same scenario names in Cucumber. And if I want to create a function call from the the scenarios and features, I can not rely on its name. Therefore I used the filepaths and the linenumber as function name.</p>
-<p>If we now go through the chunk as above from 1. to 3. step by step, we will see. Let us start with 1:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span> <span class="o">==</span>
-<span class="mi">0000</span>   <span class="mi">10</span> <span class="n">OP_CONSTANT</span>         <span class="mi">0</span> <span class="s1">&#39;&lt;fn ./examples/features/first_example.feature:3&gt;&#39;</span>
-<span class="mi">0002</span>    <span class="o">|</span> <span class="n">OP_DEFINE_VARIABLE</span>    <span class="mi">1</span> <span class="s1">&#39;./examples/features/first_example.feature:3&#39;</span>
-<span class="mi">0004</span>    <span class="o">|</span> <span class="n">OP_CALL</span>             <span class="mi">0</span>
-<span class="mi">0006</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
-</pre></div>
-</div>
-<p>And this is pretty straightforward: the feature is represented by a global function, with its path and linenumber as the function name. This is pushed to the stack and then, we immediately call it.</p>
-<p>Now we go into the function body of the feature, which means we are now in the chunk <cite>./examples/features/first_example.feature:3</cite>. In order to make it more understandable, I will add my comments to the chunk:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">features</span><span class="o">/</span><span class="n">first_example</span><span class="o">.</span><span class="n">feature</span><span class="p">:</span><span class="mi">3</span> <span class="o">==</span>
-<span class="c1"># I added print operations, to later enable/disable them during the compilation.</span>
-<span class="c1"># we push the string to print and access it in the each following print operation</span>
-<span class="mi">0000</span>    <span class="mi">3</span> <span class="n">OP_CONSTANT</span>         <span class="mi">0</span> <span class="s1">&#39;Feature: My First Feature File&#39;</span>
-<span class="mi">0002</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">0</span>
-<span class="mi">0004</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">1</span> <span class="s1">&#39;./examples/features/first_example.feature:3&#39;</span>
-<span class="mi">0006</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0008</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-<span class="mi">0009</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-
-<span class="c1"># an internal hook to reset the scenario context</span>
-<span class="c1"># you find a detailed explanation for the context and hooks in this documentation too</span>
-<span class="c1"># and after we get the hook, we call it</span>
-<span class="mi">0010</span>   <span class="mi">10</span> <span class="n">OP_CONSTANT</span>         <span class="mi">2</span> <span class="s1">&#39;reset_context&#39;</span>
-<span class="mi">0012</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># same happens with the hook before</span>
-<span class="mi">0014</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">3</span> <span class="s1">&#39;before&#39;</span>
-<span class="mi">0016</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># now there is the actual scenario at line 6, it get pushed to the stack</span>
-<span class="c1"># and we&#39;ll call it.</span>
-<span class="mi">0018</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">4</span> <span class="s1">&#39;&lt;fn ./examples/features/first_example.feature:6&gt;&#39;</span>
-<span class="mi">0020</span>    <span class="o">|</span> <span class="n">OP_CALL</span>             <span class="mi">0</span>
-
-<span class="c1"># after a scenario call there is another hook which might get called:</span>
-<span class="mi">0022</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">5</span> <span class="s1">&#39;after&#39;</span>
-<span class="mi">0024</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># we evaluate the scenario result in the vm and we&#39;re done</span>
-<span class="mi">0026</span>    <span class="o">|</span> <span class="n">OP_SCENARIO_RESULT</span>
-<span class="mi">0027</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-<span class="mi">0028</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
-</pre></div>
-</div>
-<p>And now the chunk for the scenario, which is getting bigger again:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># we&#39;re in line 6 now, inside the body of the scenario</span>
-<span class="o">==</span> <span class="o">./</span><span class="n">examples</span><span class="o">/</span><span class="n">features</span><span class="o">/</span><span class="n">first_example</span><span class="o">.</span><span class="n">feature</span><span class="p">:</span><span class="mi">6</span> <span class="o">==</span>
-<span class="c1"># we begin with prints</span>
-<span class="mi">0000</span>    <span class="mi">6</span> <span class="n">OP_CONSTANT</span>         <span class="mi">0</span> <span class="s1">&#39;Scenario: An arbitrary box&#39;</span>
-<span class="mi">0002</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">0</span>
-<span class="mi">0004</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">1</span> <span class="s1">&#39;./examples/features/first_example.feature:6&#39;</span>
-<span class="mi">0006</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0008</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-
-<span class="c1"># the function name (= its location) and the given name to the stack</span>
-<span class="c1"># and initialize it</span>
-<span class="c1"># this is necessary because if it fails we need this later</span>
-<span class="mi">0009</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">2</span> <span class="s1">&#39;./examples/features/first_example.feature:6&#39;</span>
-<span class="mi">0011</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">3</span> <span class="s1">&#39;Scenario: An arbitrary box&#39;</span>
-<span class="mi">0013</span>    <span class="o">|</span> <span class="n">OP_INIT_SCENARIO</span>
-
-<span class="c1"># now we have a jump operation before every step</span>
-<span class="c1"># because if a step fails, we want to skip the following steps</span>
-<span class="c1"># (for the first step this does not make to much sense, I know)</span>
-<span class="c1"># and then we have another hook which can be there, the call to the step</span>
-<span class="c1"># and another hook after the step</span>
-<span class="mi">0014</span>    <span class="mi">7</span> <span class="n">OP_JUMP_IF_FAILED</span>   <span class="mi">14</span> <span class="o">-&gt;</span> <span class="mi">27</span>
-<span class="mi">0017</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">4</span> <span class="s1">&#39;before_step&#39;</span>
-<span class="mi">0019</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-<span class="mi">0021</span>    <span class="mi">8</span> <span class="n">OP_CALL_STEP</span>        <span class="mi">5</span> <span class="s1">&#39;A box with 2 x 2 x 2&#39;</span>
-<span class="mi">0023</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">6</span> <span class="s1">&#39;after_step&#39;</span>
-<span class="mi">0025</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># now we executed the step and set the step result</span>
-<span class="mi">0027</span>    <span class="o">|</span> <span class="n">OP_PRINT_STEP_RESULT</span>    <span class="mi">7</span> <span class="s1">&#39;A box with 2 x 2 x 2&#39;</span>
-<span class="mi">0029</span>    <span class="o">|</span> <span class="n">OP_SET_STEP_RESULT</span>
-<span class="mi">0030</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">8</span> <span class="s1">&#39;./examples/features/first_example.feature:7&#39;</span>
-<span class="mi">0032</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0034</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-
-<span class="c1"># and this continues now for all steps:</span>
-<span class="c1"># if the previous step failed we skip to 42, else we stay and execute the hooks and the step:</span>
-<span class="mi">0035</span>    <span class="o">|</span> <span class="n">OP_JUMP_IF_FAILED</span>   <span class="mi">35</span> <span class="o">-&gt;</span> <span class="mi">48</span>
-<span class="mi">0038</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>         <span class="mi">9</span> <span class="s1">&#39;before_step&#39;</span>
-<span class="mi">0040</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-<span class="mi">0042</span>    <span class="mi">9</span> <span class="n">OP_CALL_STEP</span>       <span class="mi">10</span> <span class="s1">&#39;I open the box&#39;</span>
-<span class="mi">0044</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">11</span> <span class="s1">&#39;after_step&#39;</span>
-<span class="mi">0046</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># if we skip, we end up here: setting its result as skipped</span>
-<span class="mi">0048</span>    <span class="o">|</span> <span class="n">OP_PRINT_STEP_RESULT</span>   <span class="mi">12</span> <span class="s1">&#39;I open the box&#39;</span>
-<span class="mi">0050</span>    <span class="o">|</span> <span class="n">OP_SET_STEP_RESULT</span>
-<span class="mi">0051</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">13</span> <span class="s1">&#39;./examples/features/first_example.feature:8&#39;</span>
-<span class="mi">0053</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0055</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-<span class="mi">0056</span>    <span class="o">|</span> <span class="n">OP_JUMP_IF_FAILED</span>   <span class="mi">56</span> <span class="o">-&gt;</span> <span class="mi">69</span>
-<span class="mi">0059</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">14</span> <span class="s1">&#39;before_step&#39;</span>
-<span class="mi">0061</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-<span class="mi">0063</span>   <span class="mi">10</span> <span class="n">OP_CALL_STEP</span>       <span class="mi">15</span> <span class="s1">&#39;The box is open &#39;</span>
-<span class="mi">0065</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">16</span> <span class="s1">&#39;after_step&#39;</span>
-<span class="mi">0067</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># if we skip, we end up here: setting its result as skipped</span>
-<span class="mi">0069</span>    <span class="o">|</span> <span class="n">OP_PRINT_STEP_RESULT</span>   <span class="mi">17</span> <span class="s1">&#39;The box is open &#39;</span>
-<span class="mi">0071</span>    <span class="o">|</span> <span class="n">OP_SET_STEP_RESULT</span>
-<span class="mi">0072</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">18</span> <span class="s1">&#39;./examples/features/first_example.feature:9&#39;</span>
-<span class="mi">0074</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0076</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-<span class="mi">0077</span>    <span class="o">|</span> <span class="n">OP_JUMP_IF_FAILED</span>   <span class="mi">77</span> <span class="o">-&gt;</span> <span class="mi">90</span>
-<span class="mi">0080</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">19</span> <span class="s1">&#39;before_step&#39;</span>
-<span class="mi">0082</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-<span class="mi">0084</span>    <span class="o">|</span> <span class="n">OP_CALL_STEP</span>       <span class="mi">20</span> <span class="s1">&#39;The volume is 8 &#39;</span>
-<span class="mi">0086</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">21</span> <span class="s1">&#39;after_step&#39;</span>
-<span class="mi">0088</span>    <span class="o">|</span> <span class="n">OP_HOOK</span>             <span class="mi">0</span>
-
-<span class="c1"># if we skip, we end up here: setting its result as skipped</span>
-<span class="mi">0090</span>    <span class="o">|</span> <span class="n">OP_PRINT_STEP_RESULT</span>   <span class="mi">22</span> <span class="s1">&#39;The volume is 8 &#39;</span>
-<span class="mi">0092</span>    <span class="o">|</span> <span class="n">OP_SET_STEP_RESULT</span>
-<span class="mi">0093</span>    <span class="o">|</span> <span class="n">OP_CONSTANT</span>        <span class="mi">23</span> <span class="s1">&#39;./examples/features/first_example.feature:10&#39;</span>
-<span class="mi">0095</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINE</span>       <span class="mi">1</span>
-<span class="mi">0097</span>    <span class="o">|</span> <span class="n">OP_PRINT_LINEBREAK</span>
-
-<span class="c1"># and there we are, scenario done, up to 4 steps executed (or skipped)</span>
-<span class="c1"># and we return from the scenario</span>
-<span class="mi">0098</span>    <span class="o">|</span> <span class="n">OP_RETURN</span>
-</pre></div>
-</div>
-<p>And this is essentially what happens under the hood when you run this cucumber interpreter. The feature file is compiled into this chunk and executed in its vm. The final output from the user perspective (without the stack trace) looks like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./build/bin/box ./examples/features/first_example.feature
-
-  Feature: My First Feature File  ./examples/features/first_example.feature:3
-
-  Scenario: An arbitrary box  ./examples/features/first_example.feature:6
-[   PASSED    ] A box with 2 x 2 x 2  ./examples/features/first_example.feature:7
-[   PASSED    ] I open the box  ./examples/features/first_example.feature:8
-[   PASSED    ] The box is open   ./examples/features/first_example.feature:9
-[   PASSED    ] The volume is 8   ./examples/features/first_example.feature:10
-
-
-1 Scenarios (1 passed)
-4 Steps (4 passed)
-</pre></div>
-</div>
 </section>
 </section>
 
@@ -340,8 +219,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Coding with Thomas: Cucumber - A C/C++ Cucumber Interpreter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="01_cwt_cucumber.html" class="btn btn-neutral float-right" title="CWT-Cucumber" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="cucumber-cpp: A C++20 Cucumber Interpreter by Coding with Thomas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="01_cucumber_cpp.html" class="btn btn-neutral float-right" title="Cucumber cpp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -70,220 +70,94 @@ Lets have a look at the *clox* interpreter, which compiles the script into a chu
 
   feature();
 
-And this is translated into bytecode:
+And this is translated into bytecode.
+
+
+The First Example
+-----------------
+
+Lets see this by example, what happens. Consider the first example ``./examples/features/1_first_scenario.feature``
+
+.. code-block:: gherkin 
+
+  Feature: My first feature
+    This is my cucumber-cpp hello world
+
+    Scenario: First Scenario
+      Given An empty box
+      When I place 2 x "apple" in it
+      Then The box contains 2 item(s)
+
+Now if provide the define ``PRINT_STACK`` to enable the debug prints (which were very helpful during implementation) we can go through the different compiled chunks. First we start with the ``script`` chunk: 
+
+.. code-block:: 
+
+  == script ==
+  0000    11  op_code::constant   0 '<.\examples\features\1_first_scenario.feature:2>'
+  0002    |  op_code::define_var  1 '.\examples\features\1_first_scenario.feature:2'
+  0004    |  op_code::get_var     1 '.\examples\features\1_first_scenario.feature:2'
+  0006    |  op_code::call        0
+  0008    |  op_code::func_return
+
+And this is just the ``Feature``. All created functions are named by their filepath and linenumber. And since we want to call the feature we have ``op_code::call`` there, which loads the previous pushed varaible ``.\examples\features\1_first_scenario.feature:2``
+
+
+Next, we have the ``Scenario``: 
 
 .. code-block::
 
-  # 3.:
-  == scenario ==
-  0000    5 OP_CONSTANT         0 'Given any initial step'
-  0002    | OP_PRINT
-  0003    6 OP_CONSTANT         1 'When something happens'
-  0005    | OP_PRINT
-  0006    7 OP_CONSTANT         2 'Then we evaluate something'
-  0008    | OP_PRINT
-  0009    8 OP_NIL
-  0010    | OP_RETURN
-  
-  # 2.:
-  == feature ==
-  0000    8 OP_CONSTANT         0 '<fn scenario>'
-  0002    9 OP_GET_LOCAL        1
-  0004    | OP_CALL             0
-  0006    | OP_POP
-  0007   10 OP_NIL
-  0008    | OP_RETURN
+  == .\examples\features\1_first_scenario.feature:2 ==
+  0000    2  op_code::print_linebreak
+  0001    |  op_code::constant    1 'Feature: My first feature'
+  0003    |  op_code::print       0
+  0005    |  op_code::print_indent
+  0006    |  op_code::constant    0 '.\examples\features\1_first_scenario.feature:2'
+  0008    |  op_code::println     5
+  0010    11  op_code::reset_context
+  0011    |  op_code::hook_before 0
+  0013    |  op_code::constant    2 '<.\examples\features\1_first_scenario.feature:5>'
+  0015    |  op_code::define_var  3 '.\examples\features\1_first_scenario.feature:5'
+  0017    |  op_code::get_var     3 '.\examples\features\1_first_scenario.feature:5'
+  0019    |  op_code::call        0
+  0021    |  op_code::hook_after  0
+  0023    |  op_code::func_return
 
-  # 1.:
-  == <script> ==
-  0000   10 OP_CONSTANT         1 '<fn feature>'
-  0002    | OP_DEFINE_GLOBAL    0 'feature'
-  0004   12 OP_GET_GLOBAL       2 'feature'
-  0006    | OP_CALL             0
-  0008    | OP_POP
-  0009    | OP_NIL
-  0010    | OP_RETURN
+Here we start with some printing operations to the terminal and then we call the scenario itself. Again, the function name is the location at line 5: ``.\examples\features\1_first_scenario.feature:5``. Right before and after the scenario call the hooks are invoked, when they are implemented. 
 
-Now we can see three parts. 
-
-1. The script: A global function is defined and the call is emitted. 
-2. This represents the function or its function body in which the nested scenario is defined. After its declaration we emit the call.
-3. The execution of each step works the same way, we pull a constant (which is later the step) and then we call the underlying function, which in this case is a single print. 
-
-And this was my starting point for cwt-cucumber.
-
-Feature-File to Bytecode
-========================
-
-I left these debugging prints in the source. During CMake configuration you can set `STACK_TRACE=1` and all the bytecode and its stack will be printed to the terminal. And it really helped me during the implementation. To be honest, it has grown quite a bit and can be a bit hard to read the stack, because it overlaps with the general prints. But let's have a look at the chunk in which a feature file is translated. I used some `box` examples:
-
-.. code-block:: gherkin
-
-  # ./examples/features/first_examples.feature
-
-  Feature: My First Feature File
-    Just for demonstration
-
-    Scenario: An arbitrary box
-      Given A box with 2 x 2 x 2
-      When I open the box
-      Then The box is open 
-      And The volume is 8 
-
-As far as I noticed, it is valid to have same scenario names in Cucumber. And if I want to create a function call from the the scenarios and features, I can not rely on its name. Therefore I used the filepaths and the linenumber as function name.
-
-
-If we now go through the chunk as above from 1. to 3. step by step, we will see. Let us start with 1:
+And finally, we have the scenario call:
 
 .. code-block::
 
-  == <script> ==
-  0000   10 OP_CONSTANT         0 '<fn ./examples/features/first_example.feature:3>'
-  0002    | OP_DEFINE_VARIABLE    1 './examples/features/first_example.feature:3'
-  0004    | OP_CALL             0
-  0006    | OP_RETURN
-
-And this is pretty straightforward: the feature is represented by a global function, with its path and linenumber as the function name. This is pushed to the stack and then, we immediately call it.
-  
-Now we go into the function body of the feature, which means we are now in the chunk `./examples/features/first_example.feature:3`. In order to make it more understandable, I will add my comments to the chunk:
-
-.. code-block::
-
-  == ./examples/features/first_example.feature:3 ==
-  # I added print operations, to later enable/disable them during the compilation.
-  # we push the string to print and access it in the each following print operation
-  0000    3 OP_CONSTANT         0 'Feature: My First Feature File'
-  0002    | OP_PRINT_LINE       0
-  0004    | OP_CONSTANT         1 './examples/features/first_example.feature:3'
-  0006    | OP_PRINT_LINE       1
-  0008    | OP_PRINT_LINEBREAK
-  0009    | OP_PRINT_LINEBREAK
-  
-  # an internal hook to reset the scenario context
-  # you find a detailed explanation for the context and hooks in this documentation too
-  # and after we get the hook, we call it 
-  0010   10 OP_CONSTANT         2 'reset_context'
-  0012    | OP_HOOK             0
-  
-  # same happens with the hook before 
-  0014    | OP_CONSTANT         3 'before'
-  0016    | OP_HOOK             0
-
-  # now there is the actual scenario at line 6, it get pushed to the stack
-  # and we'll call it. 
-  0018    | OP_CONSTANT         4 '<fn ./examples/features/first_example.feature:6>'
-  0020    | OP_CALL             0
-
-  # after a scenario call there is another hook which might get called:
-  0022    | OP_CONSTANT         5 'after'
-  0024    | OP_HOOK             0
-
-  # we evaluate the scenario result in the vm and we're done 
-  0026    | OP_SCENARIO_RESULT
-  0027    | OP_PRINT_LINEBREAK
-  0028    | OP_RETURN
+  == .\examples\features\1_first_scenario.feature:5 ==
+  0000    5  op_code::print_linebreak
+  0001    |  op_code::constant    1 'Scenario: First Scenario'
+  0003    |  op_code::print       0
+  0005    |  op_code::print_indent
+  0006    |  op_code::constant    0 '.\examples\features\1_first_scenario.feature:5'
+  0008    |  op_code::println     5
+  0010    6  op_code::init_scenario
+  0011    7  op_code::jump_if_failed      17
+  0013    |  op_code::hook_before_step
+  0014    |  op_code::call_step   3 'An empty box'
+  0016    |  op_code::hook_after_step
+  0017    |  op_code::constant    3 'An empty box'
+  0019    |  op_code::constant    2 '.\examples\features\1_first_scenario.feature:6'
+  0021    |  op_code::print_step_result
+  0022    8  op_code::jump_if_failed      28
+  0024    |  op_code::hook_before_step
+  0025    |  op_code::call_step   5 'I place 2 x "apple" in it'
+  0027    |  op_code::hook_after_step
+  0028    |  op_code::constant    5 'I place 2 x "apple" in it'
+  0030    |  op_code::constant    4 '.\examples\features\1_first_scenario.feature:7'
+  0032    |  op_code::print_step_result
+  0033    11  op_code::jump_if_failed     39
+  0035    |  op_code::hook_before_step
+  0036    |  op_code::call_step   7 'The box contains 2 item(s)'
+  0038    |  op_code::hook_after_step
+  0039    |  op_code::constant    7 'The box contains 2 item(s)'
+  0041    |  op_code::constant    6 '.\examples\features\1_first_scenario.feature:8'
+  0043    |  op_code::print_step_result
+  0044    |  op_code::func_return
 
 
-And now the chunk for the scenario, which is getting bigger again:
-
-.. code-block::
-
-  # we're in line 6 now, inside the body of the scenario 
-  == ./examples/features/first_example.feature:6 ==
-  # we begin with prints
-  0000    6 OP_CONSTANT         0 'Scenario: An arbitrary box'
-  0002    | OP_PRINT_LINE       0
-  0004    | OP_CONSTANT         1 './examples/features/first_example.feature:6'
-  0006    | OP_PRINT_LINE       1
-  0008    | OP_PRINT_LINEBREAK
-
-  # the function name (= its location) and the given name to the stack 
-  # and initialize it
-  # this is necessary because if it fails we need this later
-  0009    | OP_CONSTANT         2 './examples/features/first_example.feature:6'
-  0011    | OP_CONSTANT         3 'Scenario: An arbitrary box'
-  0013    | OP_INIT_SCENARIO
-
-  # now we have a jump operation before every step 
-  # because if a step fails, we want to skip the following steps 
-  # (for the first step this does not make to much sense, I know)
-  # and then we have another hook which can be there, the call to the step 
-  # and another hook after the step 
-  0014    7 OP_JUMP_IF_FAILED   14 -> 27
-  0017    | OP_CONSTANT         4 'before_step'
-  0019    | OP_HOOK             0
-  0021    8 OP_CALL_STEP        5 'A box with 2 x 2 x 2'
-  0023    | OP_CONSTANT         6 'after_step'
-  0025    | OP_HOOK             0
-
-  # now we executed the step and set the step result 
-  0027    | OP_PRINT_STEP_RESULT    7 'A box with 2 x 2 x 2'
-  0029    | OP_SET_STEP_RESULT
-  0030    | OP_CONSTANT         8 './examples/features/first_example.feature:7'
-  0032    | OP_PRINT_LINE       1
-  0034    | OP_PRINT_LINEBREAK
-
-  # and this continues now for all steps: 
-  # if the previous step failed we skip to 42, else we stay and execute the hooks and the step:
-  0035    | OP_JUMP_IF_FAILED   35 -> 48
-  0038    | OP_CONSTANT         9 'before_step'
-  0040    | OP_HOOK             0
-  0042    9 OP_CALL_STEP       10 'I open the box'
-  0044    | OP_CONSTANT        11 'after_step'
-  0046    | OP_HOOK             0
-
-  # if we skip, we end up here: setting its result as skipped
-  0048    | OP_PRINT_STEP_RESULT   12 'I open the box'
-  0050    | OP_SET_STEP_RESULT
-  0051    | OP_CONSTANT        13 './examples/features/first_example.feature:8'
-  0053    | OP_PRINT_LINE       1
-  0055    | OP_PRINT_LINEBREAK
-  0056    | OP_JUMP_IF_FAILED   56 -> 69
-  0059    | OP_CONSTANT        14 'before_step'
-  0061    | OP_HOOK             0
-  0063   10 OP_CALL_STEP       15 'The box is open '
-  0065    | OP_CONSTANT        16 'after_step'
-  0067    | OP_HOOK             0
-
-  # if we skip, we end up here: setting its result as skipped
-  0069    | OP_PRINT_STEP_RESULT   17 'The box is open '
-  0071    | OP_SET_STEP_RESULT
-  0072    | OP_CONSTANT        18 './examples/features/first_example.feature:9'
-  0074    | OP_PRINT_LINE       1
-  0076    | OP_PRINT_LINEBREAK
-  0077    | OP_JUMP_IF_FAILED   77 -> 90
-  0080    | OP_CONSTANT        19 'before_step'
-  0082    | OP_HOOK             0
-  0084    | OP_CALL_STEP       20 'The volume is 8 '
-  0086    | OP_CONSTANT        21 'after_step'
-  0088    | OP_HOOK             0
-
-  # if we skip, we end up here: setting its result as skipped
-  0090    | OP_PRINT_STEP_RESULT   22 'The volume is 8 '
-  0092    | OP_SET_STEP_RESULT
-  0093    | OP_CONSTANT        23 './examples/features/first_example.feature:10'
-  0095    | OP_PRINT_LINE       1
-  0097    | OP_PRINT_LINEBREAK
-  
-  # and there we are, scenario done, up to 4 steps executed (or skipped)
-  # and we return from the scenario
-  0098    | OP_RETURN
-
-And this is essentially what happens under the hood when you run this cucumber interpreter. The feature file is compiled into this chunk and executed in its vm. The final output from the user perspective (without the stack trace) looks like this:
-
-.. code-block::
-
-  $ ./build/bin/box ./examples/features/first_example.feature 
-
-    Feature: My First Feature File  ./examples/features/first_example.feature:3
-
-    Scenario: An arbitrary box  ./examples/features/first_example.feature:6
-  [   PASSED    ] A box with 2 x 2 x 2  ./examples/features/first_example.feature:7
-  [   PASSED    ] I open the box  ./examples/features/first_example.feature:8
-  [   PASSED    ] The box is open   ./examples/features/first_example.feature:9
-  [   PASSED    ] The volume is 8   ./examples/features/first_example.feature:10
-
-
-  1 Scenarios (1 passed)
-  4 Steps (4 passed)
-
+You can find all according ``op_codes`` here. From loading the variables to the jump condition ``jump_if_failed`` and the hooks before and after step. The scenario name gets resolved at runtime.

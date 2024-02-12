@@ -9,9 +9,9 @@ import yaml
 import os
 
 
-project = 'SphinxExample'
-copyright = '2023, Thomas'
-author = 'Thomas'
+project = 'cucumber-cpp'
+copyright = '2024, Thomas'
+author = 'Thomas https://www.codingwiththomas.com/'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -48,11 +48,3 @@ if build_all_docs is not None:
     'current_version' : current_version,
     'versions' : [],
   }
-
-  # html_context['versions'].append(['latest', pages_root])
-
-  # with open("versions.yaml", "r") as yaml_file:
-  #   docs = yaml.safe_load(yaml_file)
-
-  # for version, details in docs.items():
-  #   html_context['versions'].append([version, pages_root+'/'+version])

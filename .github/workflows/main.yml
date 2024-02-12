@@ -39,7 +39,9 @@ jobs:
           cd docs
           git clone https://github.com/ThoSe1990/cucumber-cpp
           mkdir _build
-          python3 build_docs.py
+          doxygen Doxyfile
+          make html
+          mv ./_build/html/ ../pages/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

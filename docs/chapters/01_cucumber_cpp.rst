@@ -435,6 +435,7 @@ Doc strings are implemented and can be appended to a step. Then use ``CUKE_ARG(.
 Which prints the doc string right before the passed step (first executes the step, then prints the result):
 
 .. code-block:: sh
+
   Feature: My first feature  .\examples\features\1_first_scenario.feature:2
 
   Scenario: First Scenario  .\examples\features\1_first_scenario.feature:4

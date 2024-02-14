@@ -9,7 +9,7 @@ import yaml
 import os
 
 
-project = 'cucumber-cpp'
+project = 'cwt-cucumber'
 copyright = '2024, Thomas'
 author = 'Thomas https://www.codingwiththomas.com/'
 
@@ -21,7 +21,7 @@ extensions = [
 ]
 
 breathe_projects = {
-  "cucumber-cpp": "./_build/doxygen/xml"
+  "cwt-cucumber": "./_build/doxygen/xml"
 }
 
 templates_path = ['_templates']

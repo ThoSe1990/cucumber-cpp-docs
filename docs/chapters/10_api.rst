@@ -13,10 +13,10 @@ API Documentation
 =================
 
 .. doxygenfunction:: cuke::context()
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: cuke::context(Args&&... args)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 
 .. _api cuke_arg:
@@ -25,7 +25,7 @@ API Documentation
 ============
 
 .. doxygendefine:: CUKE_ARG
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 
 .. _api hooks:
@@ -34,16 +34,16 @@ Hooks
 =====
 
 .. doxygendefine:: BEFORE
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygendefine:: AFTER
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygendefine:: BEFORE_STEP
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygendefine:: AFTER_STEP
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 
 .. _api tagged_hooks:
@@ -52,10 +52,10 @@ Tagged Hooks
 ============
 
 .. doxygendefine:: BEFORE_T
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygendefine:: AFTER_T
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. _api asserts:
 
@@ -63,25 +63,25 @@ Asserts
 =======
 
 .. doxygenfunction:: equal(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: not_equal(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: greater(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: greater_or_equal(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: less(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: less_or_equal(const T& lhs, const U& rhs)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: is_true(bool condition)
-  :project: cucumber-cpp
+  :project: cwt-cucumber
 
 .. doxygenfunction:: is_false(bool condition)
-  :project: cucumber-cpp
+  :project: cwt-cucumber

@@ -37,7 +37,7 @@ jobs:
           sudo pip3 install linuxdoc
           sudo npm install -g jsdoc
           cd docs
-          git clone https://github.com/ThoSe1990/cucumber-cpp
+          git clone https://github.com/ThoSe1990/cwt-cucumber.git
           mkdir _build
           doxygen Doxyfile
           make html

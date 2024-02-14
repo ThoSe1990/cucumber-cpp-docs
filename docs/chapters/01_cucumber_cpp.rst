@@ -17,7 +17,7 @@ Run a CMake build to build the examples:
   cmake --build ./build
 
 
-Conan Recipe for cucumber-cpp
+Conan Recipe for cwt-cucumber
 =============================
 
 I recommend using Conan for dependency management. I have a conan recipe in  `another GitHub repository <https://github.com/ThoSe1990/cwt-cucumber-conan>`_ to create the conan package. This will do the job for now (I'll add instructions, once I'm done with the recipe). Later I can push it to conancenter, when this project is actually in use.
@@ -26,7 +26,7 @@ First we create the package:
 
 .. code-block:: sh 
 
-  git clone https://github.com/ThoSe1990/cucumber-cpp-conan.git
+  git clone https://github.com/ThoSe1990/cwt-cucumber-conan.git
   cd package
   conan create . --version 1.1.0 --user cwt --channel stable
 
@@ -39,7 +39,7 @@ Then we can build the examples:
   cmake -S . -B ./build -DCMAKE_TOOLCHAIN_FILE=./build/conan_toolchain.cmake 
   cmake --build ./build
 
-And we're done. If you want to use cucumber-cpp in your projects, you have to get the Conan package you just created and use it accordingly.
+And we're done. If you want to use cwt-cucumber in your projects, you have to get the Conan package you just created and use it accordingly.
 
 See ``./conanfile.txt``:
 
@@ -129,7 +129,7 @@ Use `Cucumber expression <https://github.com/cucumber/cucumber-expressions>`_ in
   }
 
 .. note::
-  I overloaded the implicit conversion operator to get different types. So the ``auto`` keyword will not work here. And, using the correct types, cucumber-cpp checks at runtime if it can convert a value to each specific type.
+  I overloaded the implicit conversion operator to get different types. So the ``auto`` keyword will not work here. And, using the correct types, cwt-cucumber checks at runtime if it can convert a value to each specific type.
 
 Currently supported: ``{byte}`` , ``{short}``,  ``{int}`` , ``{long}``, ``{float}`` , ``{double}`` and ``{string}``.
 
@@ -286,7 +286,7 @@ In a Scenario Outline you can define variables and run a scenario multiple times
 .. code-block:: gherkin 
 
   Feature: My first feature
-    This is my cucumber-cpp hello world
+    This is my cwt-cucumber hello world
 
     Scenario Outline: First Scenario Outline
       Given An empty box

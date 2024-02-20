@@ -16,7 +16,8 @@ Welcome to CWT-Cucumber! This is the documentation for my C++ Cucumber interpret
    :caption: Contents:
 
    chapters/00_intro
-   chapters/01_cucumber_cpp
+   chapters/01_cwt_cucumber
+   chapters/02_cucumber_features
    chapters/10_api 
    
 

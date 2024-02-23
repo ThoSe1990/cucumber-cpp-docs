@@ -297,11 +297,15 @@ You can directly access the elements with the ``operator[]``. But the underlying
   ``cuke::value`` uses type erasure and is the underlying type for all values for this interpreter. You have always to cast it to whatever type you expect. If this cast does not work (type missmatch) it throws an exception.
 
 .. code-block:: cpp
+
   const cuke::table& t = CUKE_TABLE();
   t[0][0].to_string();
   t[0][1].as<int>();
   // ... 
 
+
+.. warning:: 
+  Note that all floating point values in a table are ``doubles``. You cannot cast them to a float; if you need them as a float, go the extra mile and create a ``double``, which you then cast to a ``float``. 
 
 Option 1: Raw Access
 --------------------
@@ -339,7 +343,7 @@ You can iterate over this table with ``raw()``:
 Option 2: Hashes
 ----------------
 
-With an additional header in the table we can make this table more descriptive:`:
+With an additional header in the table we can make this table more descriptive:
 
 .. code-block:: gherkin
 

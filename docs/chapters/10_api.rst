@@ -6,6 +6,24 @@ API Documentation
 =================
 
 
+.. _api cuke_value:
+
+``cuke::value``
+===============
+
+.. doxygenclass:: cuke::value
+  :project: cwt-cucumber
+  :members:
+
+
+.. _api cuke_table:
+
+``cuke::table``
+===============
+
+.. doxygenclass:: cuke::table
+  :project: cwt-cucumber
+  :members:
 
 .. _api cuke_context:
 
